@@ -14,13 +14,15 @@ Currently, the LLM is a Q&A chatbot which has read the underlying Bupa-By-You Po
 ## Cons
 
 - I'm not sure about the value-add above existing approaches.  
-- It uses only 1 document. It might be beneficial to come up with a MASTER document from which it can Q&A.  
+- It uses only 1 document. It might be beneficial to come up with a MASTER document from which it can Q&A. 
+- The design certainly needs improving. 
 
 ## Other use-cases
 
 - The Blog Outline Generator App looks quite useful: https://streamlit.io/generative-ai
 - Generate tweets
 - Mind map generator: https://ferusandbeyond-mind-map-generation-main-7p68z9.streamlit.app/
+- To replicate Finder - or make it smarter?
 
 ## Notes
 

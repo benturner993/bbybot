@@ -75,7 +75,7 @@ def main():
             response = chain.run(input_documents=docs, question=query)
             print(cb)
         
-        with st.chat_message(name='assistant', avatar='img/bupa_logo.png'):
+        with st.chat_message(name='assistant'): #, avatar='img/bupa_logo.png'
             st.write(response)
 
     st.write("")
