@@ -15,10 +15,10 @@ openai.key = st.secrets["OPENAI_API_KEY"]
 
 def main():
 
-    st.image("img/bupa_logo.png", width=50)
+    st.image("img/bupa_logo.png", width=60)
     st.image("img/background.png")
-    st.subheader("What can we help you with today?")
- 
+    st.markdown("<h4 style='text-align: center; '>What can we help you with today? </h4>", unsafe_allow_html=True)
+
     # upload a PDF file
     #pdf = st.file_uploader("Upload your PDF", type='pdf')
 
@@ -38,7 +38,8 @@ def main():
         
     #     chunks = text_splitter.split_text(text=text)
 
-    # # embeddings
+    # create embeddings from custom document
+    # if already exists, load
     store_name="embeddings/BBY1124JAN23-BBY-Policy-Benefits-and-Terms.pkl"
     #store_name = pdf.name[:-4]
     #st.write('embeddings/'+f'{store_name}'+'.pkl')
@@ -55,7 +56,15 @@ def main():
         #     pickle.dump(VectorStore, f)
 
     # Accept user questions/query
-    query = st.text_input("Do you have a question about Bupa-By-You health insurance?")
+    if "visibility" not in st.session_state:
+        st.session_state.visibility = "visible"
+        st.session_state.disabled = False
+
+    query = st.text_input(
+        "Ask me a question about our policy documentation.",
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled
+    )
 
     if query:
         docs = VectorStore.similarity_search(query=query, k=3)
@@ -66,12 +75,19 @@ def main():
             response = chain.run(input_documents=docs, question=query)
             print(cb)
         
-        with st.chat_message(name='assistant'):
+        with st.chat_message(name='assistant', avatar='img/bupa_logo.png'):
             st.write(response)
 
-    st.markdown('''[Policy Benefits and Terms](https://www.bupa.co.uk/~/media/Files/UserDefined/BBY/BBY1124JAN23-BBY-Policy-Benefits-and-Terms.pdf)''')
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.markdown('''For more information, see [Bupa-By-You Policy Benefits and Terms](https://www.bupa.co.uk/~/media/Files/UserDefined/BBY/BBY1124JAN23-BBY-Policy-Benefits-and-Terms.pdf) or [Bupa.co.uk](https://www.bupa.co.uk/)''')
     st.markdown('''Made by Ben Turner as a **proof-of-concept only**.''')
 
 if __name__ == '__main__':
     main()
-
